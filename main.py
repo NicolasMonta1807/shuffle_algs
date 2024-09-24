@@ -1,3 +1,5 @@
+import time
+
 from utils import rec_shuffle, mem_shuffle, bottom_up_shuffle
 
 def main():
@@ -17,15 +19,29 @@ def main():
   for i, (x, y, z) in enumerate(cases):
       print(f"\nEjemplo {i+1}: X = {x}, Y = {y}, Z = {z}")
       
+      start = time.perf_counter_ns()
       rec_res = rec_shuffle.check_shuffle(x, y, z)
+      end = time.perf_counter_ns()
+      
+      print(f"Rec time: {end - start} ns")
+      
+      start = time.perf_counter_ns()
       mem_res = mem_shuffle.check_shuffle(x, y, z)
-      bot_res, index = bottom_up_shuffle.check_shuffle_bottom_up(x, y, z)
+      end = time.perf_counter_ns()
+      
+      print(f"Mem time: {end - start} ns")
+      
+      start = time.perf_counter_ns()
+      bot_res = bottom_up_shuffle.check_shuffle_bottom_up(x, y, z)
+      end = time.perf_counter_ns()
+      
+      print(f"Bottom time: {end - start} ns")
+      
       
       print(f"Recursive result: {rec_res}")
       print(f"Memoized result: {mem_res}")
       print(f"Bottom up result: {bot_res}")
-      if bot_res:
-        print(f"\tMatched with: X{index[0]} + Y{index[1]}")
+    
 
 if __name__ == "__main__":
   main()
