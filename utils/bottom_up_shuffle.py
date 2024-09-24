@@ -1,6 +1,6 @@
 def check_shuffle_bottom_up(x, y, z):
     if len(z) != len(x) + len(y):
-        return False, [], []
+        return False, []
     
     dp = [[False] * (len(y) + 1) for _ in range(len(x) + 1)]
     
